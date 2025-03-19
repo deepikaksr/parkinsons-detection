@@ -1,4 +1,3 @@
-# Import necessary libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -18,6 +17,14 @@ df.drop(columns=['name'], inplace=True)
 # Define features (X) and target variable (y)
 X = df.drop(columns=['status'])
 y = df['status']
+
+# Plot the distribution of Parkinson's Disease Status
+plt.figure(figsize=(6, 4))
+sns.countplot(x=y, palette='coolwarm')
+plt.title("Distribution of Parkinson's Disease Status")
+plt.xlabel("Status (0 = Healthy, 1 = Parkinson's)")
+plt.ylabel("Count")
+plt.show()
 
 # Train-test split (80% training, 20% testing)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
@@ -46,7 +53,7 @@ print(conf_matrix)
 print("\nClassification Report:")
 print(class_report)
 
-
+# Define the prediction function
 def predict_parkinsons(features):
     """
     Predicts if a person has Parkinson's disease based on input voice features.
@@ -91,5 +98,5 @@ result_healthy = predict_parkinsons(sample_input_healthy)
 
 # Display results
 print("\nPrediction for sample input (Parkinson's case):", result_parkinsons)
-print("\nPrediction for sample input (Healthy case):", result_healthy)
+print("Prediction for sample input (Healthy case):", result_healthy)
 print("\n")
